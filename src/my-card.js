@@ -69,6 +69,13 @@ export class MyCard extends LitElement {
     return html`
       <div class="epiccard">
         <h1>${this.title}</h1>
+        <p>${this.text}</p>
+        <details ?open="${this.fancy}">
+          <summary>Description</summary>
+          <div>
+            <slot>This is an Epic Raccon that loves to dance.</slot>
+          </div>
+        </details>
         <img src="${this.imageUrl}" alt="Raccoon Image">
         <div>
           <a href="https://www.youtube.com/watch?v=F2YpXC1itEE" class="epic">
