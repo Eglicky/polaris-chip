@@ -78,33 +78,32 @@ export class MyCard extends LitElement {
 }
 
 
-  render() {
-    return html`
-      <div class="epiccard">
-        <h1>${this.title}</h1>
-        <p>${this.text}</p>
-        <details @toggle="${this.fancyToggle}">
-          <summary>Description</summary>
-          <div>
-            <slot>This is an EPIC Raccon that loves to ROCK. ROCK AND ROLL!</slot>
-          </div>
-        </details>
-        <img src="${this.imageUrl}" alt="Raccoon Image">
+render() {
+  return html`
+    <div class="epiccard">
+      <h1>${this.title}</h1>
+      <p>${this.text}</p>
+      <details @toggle="${this.fancyToggle}">
+        <summary>Description</summary>
         <div>
-          <a href="https://www.youtube.com/watch?v=F2YpXC1itEE" class="epic">
-            <button class="epicbuttonwow">Epic Raccoon Video</button>
-          </a>
+          <slot>This is an EPIC Raccon that loves to ROCK. ROCK AND ROLL!</slot>
         </div>
-        <div class="epiccard-wrap">
-          <button class="duplicate">Clone Card</button>
-          <button id="bg-change">Change background</button>
-        </div>
-        <button id="yay">Make Another</button>
-        <button id="change-title">Change Title</button>
-        <button id="change-image">Change Image</button>
+      </details>
+      <img src="${this.imageUrl}" alt="Raccoon Image">
+      <div>
+        <a href="https://www.youtube.com/watch?v=F2YpXC1itEE" class="epic">
+          <button class="epicbuttonwow">Epic Raccoon Video</button>
+        </a>
       </div>
-    `;
-  }
+      <div class="epiccard-wrap">
+        <button class="duplicate">Clone Card</button>
+        <button @click="${this.toggleFancy}" id="bg-change">Change background</button>
+      </div>
+      <button @click="${this.changeTitle}" id="change-title">Change Title</button>
+      <button @click="${this.changeImage}" id="change-image">Change Image</button>
+    </div>
+  `;
+}
 
   static get properties() {
     return {
@@ -114,15 +113,36 @@ export class MyCard extends LitElement {
     };
   }
 
+  changeTitle() {
+    this.title = "Fancy Epic Raccoon"
+  }
+
+  changeImage() {
+    this.imageUrl = "https://img.freepik.com/premium-photo/epic-jedi-raccoon-4k-ultradetailed-cinematic-shot_785229-3575.jpg?w=1060";
+  }
+
+  bringOGCardBack() {
+    this.title = this.OGTitle;
+    this.imageUrl = this.OGImage;
+
+   
+  }
 
 fancyToggle(event) {
   this.fancy = event.target.open;
   if (this.fancy) {
     this.classList.add('fancy');
+    this.changeImage();
+    this.changeTitle();
   } else {
     this.classList.remove('fancy');
+    this.bringOGCardBack();
     }
+    
   }
+
+
+
 }
 // Register the custom element with the browser
 customElements.define(MyCard.tag, MyCard);
