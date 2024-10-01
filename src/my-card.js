@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import '@haxtheweb/multiple-choice/lib/true-false-question.js';
 
 /**
  * Now it's your turn. Here's what we need to try and do:
@@ -86,7 +87,12 @@ render() {
       <details @toggle="${this.fancyToggle}">
         <summary>Description</summary>
         <div>
-          <slot>This is an EPIC Raccon that loves to ROCK. ROCK AND ROLL!</slot>
+          <slot>This is an EPIC Raccon that is also a jedi. May the force be with you. Do not try to get rid of jedi racoon. Jedi racoon has killed epic racoon.
+          <true-false-question question="Is water wet?">
+  <input type="checkbox" value="Yes, obv." correct="correct" role="textbox">
+  <input type="checkbox" value="No, bruh.">
+</true-false-question>
+          </slot>
         </div>
       </details>
       <img src="${this.imageUrl}" alt="Raccoon Image">
