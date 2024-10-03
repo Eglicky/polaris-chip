@@ -13,7 +13,7 @@ export default {
     chunkFileNames: '[hash].js',
     assetFileNames: '[hash][extname]',
     format: 'es',
-    dir: 'public',
+    dir: 'dist',
   },
   preserveEntrySignatures: false,
 
