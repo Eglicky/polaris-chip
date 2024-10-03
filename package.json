@@ -10,7 +10,7 @@
     "storybook": "npm run analyze -- --exclude dist && web-dev-server -c .storybook/server.mjs",
     "storybook:build": "npm run analyze -- --exclude dist && build-storybook",
     "build": "rimraf public && rollup -c rollup.config.js",
-    "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
+    "start:build": "web-dev-server --root-dir public --app-index index.html --open",
     "analyze": "cem analyze --litelement",
     "start": "web-dev-server"
   },

@@ -7,13 +7,13 @@ import { generateSW } from 'rollup-plugin-workbox';
 import path from 'path';
 
 export default {
-  input: 'index.html',
+  input: 'src/index.html',
   output: {
     entryFileNames: '[hash].js',
     chunkFileNames: '[hash].js',
     assetFileNames: '[hash][extname]',
     format: 'es',
-    dir: 'dist',
+    dir: 'public',
   },
   preserveEntrySignatures: false,
 
