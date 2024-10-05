@@ -1,13 +1,19 @@
+import { fileURLToPath } from 'url';
+import { dirname, resolve, join } from 'path';
+
 import nodeResolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import html from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
-import path from 'path';
+
+// Get the current file's directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default {
-  input: path.resolve(_dirname, 'index.html'),
+  input: resolve(__dirname, 'index.html'), // Use resolve to get the full path
   output: {
     entryFileNames: '[hash].js',
     chunkFileNames: '[hash].js',
@@ -20,10 +26,10 @@ export default {
   plugins: [
     /** Enable using HTML as rollup entrypoint */
     html({
-      input: path.resolve(__dirname, 'index.html'),
+      input: resolve(__dirname, 'index.html'), // Use resolve here
       minify: true,
       injectServiceWorker: true,
-      serviceWorkerPath: 'dist/sw.js',
+      serviceWorkerPath: join(__dirname, 'dist', 'sw.js'), // Adjust for clarity
     }),
     /** Resolve bare module imports */
     nodeResolve(),
@@ -71,9 +77,9 @@ export default {
     generateSW({
       navigateFallback: '/index.html',
       // where to output the generated sw
-      swDest: path.join('dist', 'sw.js'),
+      swDest: join(__dirname, 'dist', 'sw.js'), // Adjust for clarity
       // directory to match patterns against to be precached
-      globDirectory: path.join('dist'),
+      globDirectory: join(__dirname, 'dist'),
       // cache any html js and css by default
       globPatterns: ['**/*.{html,js,css,webmanifest}'],
       skipWaiting: true,
