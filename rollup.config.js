@@ -7,7 +7,7 @@ import { generateSW } from 'rollup-plugin-workbox';
 import path from 'path';
 
 export default {
-  input: 'index.html',
+  input: path.resolve(_dirname, 'index.html'),
   output: {
     entryFileNames: '[hash].js',
     chunkFileNames: '[hash].js',
@@ -20,6 +20,7 @@ export default {
   plugins: [
     /** Enable using HTML as rollup entrypoint */
     html({
+      input: path.resolve(__dirname, 'index.html'),
       minify: true,
       injectServiceWorker: true,
       serviceWorkerPath: 'dist/sw.js',
